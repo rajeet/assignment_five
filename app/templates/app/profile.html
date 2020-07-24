@@ -1,0 +1,40 @@
+{% load static %}
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Profile</title>
+</head>
+<body>
+    This is profile page
+    <h4>Click <a href="{% url 'account:logout' %}">here</a> to logout</h4>
+    <div>
+        <img src="../../../media/{{request.user.username}}" alt="#" height="100px" width="100px"><br>
+        <a href="{% url 'account:profilepic'%}">Add Picture</a><br>
+        <a href="{% url 'account:editprofile'%}">edit profile</a><br>
+        <a href="{% url 'account:deleteprofile'%}">Delete Account</a>
+        <H3>First Name: {{request.user.first_name}}</H3>
+        <h3>Last Name: {{request.user.last_name}} </h3>
+        <h3>Username: {{request.user.username}} </h3>
+        <h3>Email:{{request.user.email}} </h3>
+    </div>
+    <hr>
+    <h3><a href="{% url 'account:create-blog' %}">Create Blog</a></h3>
+    <h3><a href="{% url 'account:manage-blog' %}">Manage Your Own Blog</a></h3>
+    <h3>Newsfeed Blogs</h3>
+    <hr>
+    {% for i in blogs %}
+    <b>Title: {{ i.title }}</b>
+
+    <p>{{i.blog_details|slice:':30'}}...</p>
+    <h5>Created By: {{ i.user.username }}</h5>
+    <a href="{% url 'account:detailblog' i.id%}">readmore</a>
+
+    <hr>
+    {% endfor %}
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Blog</title>
+</head>
+
+<body>
+    This is Manage Page<br />
+    <a href="{% url 'account:profile'%}">Profile Page</a>
+<table class="table" border="2px" width="100%">
+    <tr>
+        <th>S.N.</th>
+        <th>Blog Title</th>
+        <th>Blog Detail</th>
+        <th>Created Date</th>
+        <th>Modified Date</th>
+        <th>Actions</th>
+    </tr>
+    {% for i in data %}
+            <tr>
+        <td>1</td>
+        <td>{{i.title}}</td>
+        <td>{{i.blog_details|slice:':30'}}...</td>
+        <td>{{i.created_at}}</td>
+        <td>{{i.modified_at}}</td>
+        <td align="center">
+            ||<a href="{% url 'account:updateblog' i.id%}">update</a>||
+            <a href="{% url 'account:deleteblog' i.id%}">delete</a>||
+        </td>
+    </tr>
+
+    {% endfor %}
+</table>
+</body>
+</html>

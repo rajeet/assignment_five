@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+{% if request.user %}
+    {{request.user.email}}
+<a href="{% url 'account:profile' %}">Profile</a><br><br>
+{% endif %}
+{% if not request.user %}
+<a href="{% url 'account:login' %}">Login</a> ||
+<a href="{% url 'account:login' %}">Signup</a><br><br>
+{% endif %}
+
+{% for i in data %}
+    {{i.title}}<br>
+    {{ i.blog_details|slice:':200'}}<br>
+    <pre><a href="{% url 'account:detailblog' i.id %}">let's read</a></pre>
+    <pre>{{i.created_at}}</pre>
+<hr>
+{% endfor %}
+
+</body>
+</html>
